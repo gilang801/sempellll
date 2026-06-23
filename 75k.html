@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#100a10">
+<title>Untukmu, Semua Alasan Aku Bersyukur ✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Pinyon+Script&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#100a10;
+  --bg2:#170e18;
+  --bg3:#1f1320;
+  --rose:#c2607a;
+  --rose2:#e8849a;
+  --rose3:#f5b8c8;
+  --rose4:#fce0e8;
+  --gold:#c9956c;
+  --gold2:#e3c39a;
+  --gold-soft:#ecd2b6;
+  --ink:#f3e9ec;
+  --ink2:#cbb1bc;
+  --ink3:#8c6e7a;
+  --border:rgba(201,149,108,0.16);
+  --border2:rgba(201,149,108,0.32);
+  --paper:#f7eee2;
+  --paper-ink:#4a3530;
+}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  line-height:1.7;
+  -webkit-text-size-adjust:100%;
+}
+
+/* ============ AMBIENT BACKGROUND CANVAS ============ */
+#bg-canvas{
+  position:fixed;top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+#petal-canvas{
+  position:fixed;top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;z-index:0;
+  opacity:0.5;
+}
+
+/* ============ PAGE SYSTEM ============ */
+.page{
+  position:relative;z-index:2;
+  min-height:100vh;min-height:100dvh;
+  width:100%;
+  display:none;
+  flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:7vh 6vw;
+  padding-top:max(7vh,env(safe-area-inset-top));
+  padding-bottom:max(7vh,env(safe-area-inset-bottom));
+}
+.page.active{
+  display:flex;
+  animation:pageIn 1s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(30px) scale(.99);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+.eyebrow{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.68rem;font-weight:400;
+  letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:1.1rem;
+  opacity:.9;
+}
+.sec-title{
+  font-family:'Playfair Display',serif;
+  font-weight:600;font-style:italic;
+  font-size:clamp(2.1rem,6vw,3.4rem);
+  line-height:1.12;color:var(--ink);
+  margin-bottom:.5rem;
+}
+.sec-title em{
+  font-style:italic;
+  background:linear-gradient(135deg,var(--rose2),var(--gold-soft));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.sec-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.05rem;font-weight:400;
+  color:var(--rose3);opacity:.85;
+  margin-bottom:2.2rem;
+}
+.line-deco{
+  width:46px;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  margin:1.3rem auto;
+}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.74rem;font-weight:500;
+  letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--bg);
+  background:linear-gradient(135deg,var(--gold-soft),var(--rose3));
+  border:none;border-radius:100px;
+  padding:.9rem 2.1rem;
+  min-height:46px;
+  cursor:pointer;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;
+  box-shadow:0 10px 30px rgba(201,149,108,0.25);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 38px rgba(201,149,108,0.4);}
+.btn:active{transform:translateY(0) scale(.97);}
+.btn-ghost{
+  background:transparent;
+  border:1px solid var(--border2);
+  color:var(--rose3);
+  box-shadow:none;
+}
+.btn-ghost:hover{background:rgba(194,96,122,0.08);}
+.btn-next{margin-top:2.8rem;}
+.btn.hidden{opacity:0;transform:translateY(10px);pointer-events:none;}
+.btn{transition:opacity .6s ease,transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;}
+
+/* ============ MUSIC TOGGLE ============ */
+.music-btn{
+  position:fixed;bottom:1.6rem;right:1.6rem;
+  width:46px;height:46px;
+  background:rgba(16,10,16,.75);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border2);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:300;font-size:1.1rem;
+  transition:all .3s;
+  box-shadow:0 4px 20px rgba(0,0,0,.4);
+}
+.music-btn:hover{border-color:var(--gold);transform:scale(1.08);}
+.music-btn.muted{opacity:.55;}
+
+/* ============ PROGRESS DOTS ============ */
+.progress-dots{
+  position:fixed;top:1.4rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:.45rem;z-index:300;
+}
+.progress-dots span{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,0.18);
+  transition:all .4s ease;
+}
+.progress-dots span.done{background:var(--gold-soft);}
+.progress-dots span.now{background:var(--rose3);width:18px;border-radius:4px;}
+
+/* ============================================================
+   INTRO TYPER — personal greeting before the gift
+============================================================ */
+.intro-typer{
+  display:flex;align-items:center;justify-content:center;
+  min-height:32vh;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-weight:400;
+  font-size:clamp(1.4rem,5vw,2.2rem);
+  color:var(--rose3);
+  text-align:center;
+  padding:0 5vw;
+}
+.intro-typer.done{
+  animation:introFadeOut .7s ease forwards;
+}
+@keyframes introFadeOut{
+  to{opacity:0;height:0;min-height:0;margin:0;transform:translateY(-12px);}
+}
+.intro-caret{
+  display:inline-block;margin-left:3px;
+  color:var(--gold-soft);
+  animation:caretBlink .8s step-end infinite;
+}
+@keyframes caretBlink{0%,50%{opacity:1}50.01%,100%{opacity:0}}
+
+.gift-content{
+  display:flex;flex-direction:column;align-items:center;
+  opacity:0;
+  max-height:0;
+  overflow:hidden;
+  transform:translateY(16px);
+  transition:opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1), max-height 0s;
+}
+.gift-content.visible{
+  opacity:1;transform:translateY(0);
+  max-height:none;
+  overflow:visible;
+}
+
+/* ============================================================
+   GIFT BOX (cinematic, Web Animations API driven)
+============================================================ */
+.gift-hint{
+  font-family:'DM Sans',sans-serif;
+  font-size:0.72rem;font-weight:300;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--ink3);margin-top:2.2rem;
+}
+.gift-hint span{animation:sparkle 2s ease-in-out infinite;display:inline-block;}
+@keyframes sparkle{0%,100%{opacity:1}50%{opacity:.35;transform:scale(1.1)}}
+
+.gift-container{
+  cursor:pointer;position:relative;
+  width:190px;height:210px;
+  display:flex;align-items:flex-end;justify-content:center;
+  filter:drop-shadow(0 20px 55px rgba(194,96,122,0.3));
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  margin-top:1rem;
+}
+.gift-container:hover{transform:scale(1.04) translateY(-5px);}
+
+.gift-box-body{
+  width:170px;height:150px;
+  background:linear-gradient(160deg,#3d2230 0%,#23131c 100%);
+  border:1px solid var(--border2);
+  border-radius:10px 10px 12px 12px;
+  position:absolute;bottom:0;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+.gift-box-body::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:20px;height:100%;
+  background:linear-gradient(to bottom,var(--gold-soft),var(--gold));
+  opacity:.85;
+}
+.gift-box-body::after{
+  content:'';position:absolute;top:50%;left:0;transform:translateY(-50%);
+  width:100%;height:20px;
+  background:linear-gradient(to right,var(--gold-soft),var(--gold),var(--gold-soft));
+  opacity:.85;
+}
+.box-shine{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.06) 0%,transparent 50%);border-radius:inherit;}
+.box-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(245,184,200,.1) 1px,transparent 1px);background-size:18px 18px;}
+
+.gift-lid{
+  width:186px;height:48px;
+  background:linear-gradient(160deg,#4a2b3a 0%,#2d1722 100%);
+  border:1px solid var(--border2);
+  border-radius:10px 10px 6px 6px;
+  position:absolute;top:0;left:50%;
+  transform:translateX(-50%);
+  z-index:2;overflow:hidden;
+  will-change:transform,opacity;
+}
+.gift-lid::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:20px;height:100%;
+  background:linear-gradient(to bottom,var(--rose3),var(--gold-soft));
+  opacity:.9;
+}
+.gift-lid::after{
+  content:'';position:absolute;top:50%;left:0;transform:translateY(-50%);
+  width:100%;height:20px;
+  background:linear-gradient(to right,var(--rose3),var(--gold-soft),var(--rose3));
+  opacity:.9;
+}
+.lid-shine{position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,transparent 60%);border-radius:inherit;pointer-events:none;}
+
+.gift-bow{position:absolute;top:-22px;left:50%;transform:translateX(-50%);width:74px;height:44px;z-index:3;}
+.bow-left,.bow-right{
+  position:absolute;bottom:0;width:32px;height:36px;border-radius:50% 50% 0 50%;
+  background:linear-gradient(135deg,var(--gold-soft),var(--gold));
+  box-shadow:0 2px 8px rgba(0,0,0,.3);
+}
+.bow-left{left:0;transform:rotate(-40deg);transform-origin:bottom right;}
+.bow-right{right:0;border-radius:50% 50% 50% 0;transform:rotate(40deg);transform-origin:bottom left;}
+.bow-center{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:17px;height:17px;border-radius:50%;
+  background:linear-gradient(135deg,var(--rose4),var(--gold-soft));
+  box-shadow:0 2px 6px rgba(0,0,0,.3);z-index:4;
+}
+.bow-tail-l,.bow-tail-r{
+  position:absolute;bottom:-9px;width:13px;height:20px;
+  background:linear-gradient(to bottom,var(--gold),#9c6b46);
+  border-radius:0 0 6px 6px;
+}
+.bow-tail-l{left:26px;transform:rotate(-15deg);transform-origin:top center;}
+.bow-tail-r{right:26px;transform:rotate(15deg);transform-origin:top center;}
+
+.gift-glow{
+  position:absolute;inset:-18px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(201,149,108,0.18) 0%,transparent 70%);
+  animation:glowPulse 2.5s ease-in-out infinite;pointer-events:none;z-index:-1;
+}
+@keyframes glowPulse{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(1.15);opacity:1;}}
+
+#burst-canvas{position:fixed;inset:0;pointer-events:none;z-index:610;display:none;}
+#burst-layer{position:fixed;inset:0;pointer-events:none;z-index:615;overflow:hidden;display:none;}
+
+/* ============================================================
+   GRATITUDE BOOK — real 3D page-turn
+============================================================ */
+.book-stage{
+  perspective:2400px;
+  width:min(92vw,720px);
+  margin:0 auto;
+}
+.book{
+  position:relative;
+  width:100%;
+  aspect-ratio:4/2.85;
+  margin:0 auto;
+}
+.book-spine{
+  position:absolute;left:50%;top:2%;bottom:2%;width:6px;
+  transform:translateX(-50%);
+  background:linear-gradient(to bottom,#7a4a3a,#3d241c);
+  border-radius:2px;
+  box-shadow:0 0 18px rgba(0,0,0,.5);
+  z-index:5;
+}
+.book-base{
+  position:absolute;inset:0;
+  display:flex;
+  border-radius:8px;
+  box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px var(--border2);
+  overflow:hidden;
+  background:linear-gradient(160deg,#241319,#150a10);
+}
+.book-half{
+  position:relative;width:50%;height:100%;
+  background:var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:6% 7%;
+  overflow:hidden;
+}
+.book-half.left{border-right:1px solid rgba(0,0,0,.08);}
+.book-half.right{border-left:1px solid rgba(0,0,0,.08);}
+.book-half::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,rgba(0,0,0,0) 60%,rgba(0,0,0,.06) 100%);
+  pointer-events:none;
+}
+
+.page-photo{
+  position:relative;
+  width:72%;
+  max-width:170px;
+  aspect-ratio:1/0.92;
+  margin-bottom:.75rem;
+  background:#fff;
+  padding:8px 8px 16px;
+  border-radius:3px;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.04),
+    0 8px 18px rgba(80,50,45,.16),
+    0 2px 5px rgba(80,50,45,.1);
+  transform:rotate(var(--photo-tilt, -1.5deg));
+  transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.page-photo::before{
+  /* subtle aged-paper edge so the photo feels glued into the journal, not floating */
+  content:'';
+  position:absolute;inset:0;
+  border-radius:3px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
+  pointer-events:none;
+}
+.page-photo img{
+  display:block;
+  width:100%;height:100%;
+  object-fit:cover;
+  border-radius:1px;
+  background:linear-gradient(135deg,#e7d3da,#d8b9c9);
+}
+.page-photo .photo-tape{
+  position:absolute;
+  top:-9px;left:50%;
+  transform:translateX(-50%) rotate(-3deg);
+  width:46px;height:18px;
+  background:rgba(236,210,182,0.55);
+  border:1px solid rgba(201,149,108,0.25);
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+}
+
+.page-illustration{
+  width:64px;height:64px;margin-bottom:.9rem;
+  opacity:.85;
+}
+.page-illustration svg{width:100%;height:100%;}
+
+.page-number{
+  position:absolute;bottom:5%;
+  font-family:'DM Sans',sans-serif;
+  font-size:.65rem;letter-spacing:.15em;
+  color:var(--ink3);opacity:.5;
+}
+.book-half.left .page-number{left:7%;}
+.book-half.right .page-number{right:7%;}
+
+.page-label{
+  font-family:'DM Sans',sans-serif;
+  font-size:.6rem;font-weight:500;
+  letter-spacing:.26em;text-transform:uppercase;
+  color:#a87a8c;margin-bottom:.55rem;
+}
+.page-title{
+  font-family:'Playfair Display',serif;
+  font-style:italic;font-weight:600;
+  font-size:clamp(1rem,2.3vw,1.28rem);
+  color:var(--paper-ink);
+  margin-bottom:.5rem;
+  line-height:1.22;
+}
+.page-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(.74rem,1.45vw,.86rem);
+  font-weight:400;line-height:1.52;
+  color:#5c4540;
+  max-width:94%;
+}
+
+/* Flippable leaf */
+.leaf{
+  position:absolute;top:0;right:0;width:50%;height:100%;
+  transform-origin:left center;
+  transform-style:preserve-3d;
+  transition:transform 1s cubic-bezier(.45,0,.2,1);
+  z-index:10;
+  cursor:pointer;
+}
+.leaf.flipped{transform:rotateY(-180deg);z-index:3;}
+.leaf-face{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  background:var(--paper);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:6% 7%;
+}
+.leaf-front{
+  box-shadow:inset -8px 0 24px rgba(0,0,0,.06);
+}
+.leaf-back{
+  transform:rotateY(180deg);
+  box-shadow:inset 8px 0 24px rgba(0,0,0,.06);
+}
+.leaf::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(to left,rgba(0,0,0,.18),transparent 18%);
+  opacity:0;transition:opacity .5s;
+  pointer-events:none;
+}
+.leaf:not(.flipped):hover::after{opacity:.5;}
+.leaf.flipped::after{
+  background:linear-gradient(to right,rgba(0,0,0,.16),transparent 18%);
+}
+.leaf.flipped:hover::after{opacity:.5;}
+
+.leaf-front .page-illustration,
+.leaf-front .page-label,
+.leaf-front .page-title,
+.leaf-front .page-text{opacity:1;}
+
+.cover-hint{
+  font-family:'DM Sans',sans-serif;font-style:normal;
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);opacity:0;
+}
+.leaf:not(.flipped) .cover-hint{
+  opacity:.7;position:absolute;bottom:7%;right:7%;
+  animation:hintPulse 2.4s ease-in-out infinite;
+}
+.back-hint{
+  font-family:'DM Sans',sans-serif;font-style:normal;
+  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);opacity:0;
+}
+.leaf.flipped .back-hint{
+  opacity:.55;position:absolute;bottom:7%;left:7%;
+  animation:hintPulse 2.4s ease-in-out infinite;
+}
+@keyframes hintPulse{0%,100%{opacity:.4}50%{opacity:.85}}
+
+.book-progress{
+  margin-top:1.6rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink3);
+}
+.book-progress strong{color:var(--gold-soft);font-weight:600;}
+
+@media(max-width:680px){
+  .book-stage{width:96vw;}
+  .book{aspect-ratio:3/2.7;}
+  .book-half{padding:4.5% 5%;}
+  .page-illustration{width:42px;height:42px;margin-bottom:.5rem;}
+  .page-photo{width:62%;max-width:120px;margin-bottom:.5rem;padding:6px 6px 12px;}
+  .page-label{font-size:.54rem;margin-bottom:.35rem;}
+  .page-title{font-size:clamp(.86rem,3.4vw,1.02rem);margin-bottom:.32rem;}
+  .page-text{font-size:clamp(.62rem,2.3vw,.72rem);line-height:1.38;}
+  .page-number{bottom:2.5%;font-size:.52rem;}
+  .cover-hint{font-size:.48rem;bottom:3.5%!important;}
+  .back-hint{font-size:.48rem;bottom:3.5%!important;}
+  .leaf-face{padding:4.5% 5%;}
+}
+
+@media(max-width:420px){
+  .book{aspect-ratio:3/3.05;}
+  .page-illustration{width:34px;height:34px;}
+  .page-photo{width:58%;max-width:104px;}
+  .page-title{font-size:clamp(.78rem,3.2vw,.92rem);}
+  .page-text{font-size:clamp(.58rem,2.1vw,.66rem);line-height:1.34;}
+}
+
+/* ============================================================
+   LETTER WITH WAX SEAL
+============================================================ */
+.envelope-wrap{
+  position:relative;width:min(92vw,460px);
+  margin:1.4rem 0 1.6rem;
+  display:flex;justify-content:center;
+  perspective:1200px;
+}
+.envelope{
+  position:relative;width:100%;aspect-ratio:3/2.6;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+}
+.envelope-back{
+  position:absolute;inset:0;
+  background:linear-gradient(150deg,#e9c9d2 0%,#d9a4b6 55%,#9c4a6c 100%);
+  border-radius:10px;
+  box-shadow:0 18px 40px rgba(0,0,0,.4);
+  z-index:1;
+}
+.letter-paper{
+  position:absolute;left:5%;right:5%;bottom:3%;top:6%;
+  background:var(--paper);
+  border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,.28);
+  padding:1.3rem 1.3rem;overflow-y:auto;text-align:left;
+  z-index:2;opacity:0;
+  transform:translateY(20%) scale(.9);
+  transition:transform .7s cubic-bezier(.34,1.56,.64,1) .25s,opacity .5s ease .25s;
+  pointer-events:none;
+}
+.letter-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:.88rem;line-height:1.6;color:var(--paper-ink);
+  margin-bottom:.65rem;
+}
+.letter-text:first-child{font-size:.96rem;}
+.letter-signoff{
+  font-family:'Pinyon Script',cursive;
+  font-size:1.5rem;color:#9c4a6c;
+  margin-top:.5rem;text-align:right;
+}
+.envelope-flap{
+  position:absolute;top:0;left:0;right:0;height:56%;
+  background:linear-gradient(150deg,#f0c3d2 0%,#e3aebd 55%,#9c4a6c 100%);
+  clip-path:polygon(0 0,100% 0,50% 100%);
+  border-radius:10px 10px 0 0;
+  transform-origin:top center;
+  transition:transform .7s cubic-bezier(.45,0,.55,1),opacity .4s ease .3s;
+  box-shadow:0 6px 16px rgba(0,0,0,.2);
+  z-index:3;
+}
+.wax-seal{
+  position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);
+  width:46px;height:46px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#c2607a,#7a2d45);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;color:var(--gold-soft);
+  box-shadow:0 6px 16px rgba(0,0,0,.3),inset 0 -3px 6px rgba(0,0,0,.3);
+  z-index:4;transition:opacity .35s ease,transform .35s ease;
+}
+.envelope.opened .envelope-flap{transform:rotateX(-180deg);opacity:0;pointer-events:none;}
+.envelope.opened .wax-seal{opacity:0;transform:translate(-50%,-50%) scale(.3);}
+.envelope.opened .letter-paper{opacity:1;transform:translateY(0) scale(1);pointer-events:auto;z-index:5;}
+.envelope.opened{cursor:default;}
+
+.letter-hint{
+  font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:300;
+  letter-spacing:.25em;text-transform:uppercase;color:var(--ink3);
+  margin-top:1.6rem;
+}
+
+/* ============================================================
+   GALLERY — self-assembling mosaic wall
+============================================================ */
+.mosaic-wall{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:auto;
+  gap:.75rem;
+  max-width:680px;width:100%;
+  margin:.5rem auto 1rem;
+}
+.mosaic-tile{
+  position:relative;border-radius:14px;overflow:hidden;
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--border);
+  cursor:pointer;
+  opacity:0;transform:translateY(40px) scale(.88) rotate(var(--tilt,0deg));
+  transition:transform .7s cubic-bezier(.22,1,.36,1),opacity .6s ease,border-color .3s;
+  /* default: square-ish aspect ratio */
+  aspect-ratio:1/1;
+}
+.mosaic-tile.in-view{opacity:1;transform:translateY(0) scale(1) rotate(var(--tilt,0deg));}
+.mosaic-tile:hover{border-color:var(--border2);z-index:4;transform:translateY(-5px) scale(1.04) rotate(0deg);}
+.mosaic-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.mosaic-tile:hover img{transform:scale(1.08);}
+.mosaic-tile .tile-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(16,10,16,.88),transparent 70%);
+  padding:.7rem .6rem .5rem;
+  opacity:0;transition:opacity .3s;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.8rem;
+  color:var(--rose3);text-align:center;
+}
+.mosaic-tile:hover .tile-cap{opacity:1;}
+
+/* Layout variations — column/row spans only, aspect ratio handles the height */
+.mosaic-tile.t-big{
+  grid-column:span 2;
+  grid-row:span 2;
+  aspect-ratio:1/1; /* spans 2 cols × 2 rows → naturally square */
+}
+.mosaic-tile.t-wide{
+  grid-column:span 2;
+  aspect-ratio:2/1;
+}
+.mosaic-tile.t-tall{
+  grid-row:span 2;
+  aspect-ratio:1/2;
+}
+
+/* Decorative film-grain overlay */
+.mosaic-tile::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;opacity:0.3;border-radius:inherit;
+}
+
+.gallery-words{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:1rem;color:var(--ink3);letter-spacing:.06em;
+  margin-top:1rem;
+}
+
+/* lightbox */
+.lightbox{
+  position:fixed;inset:0;background:rgba(5,3,8,.94);
+  z-index:9000;backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.lightbox.open{opacity:1;pointer-events:all;}
+.lightbox img{max-width:88vw;max-height:84vh;border-radius:10px;object-fit:contain;}
+.lightbox .lb-cap{
+  position:absolute;bottom:6%;left:0;right:0;text-align:center;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--rose3);
+}
+.lb-close{
+  position:absolute;top:1.4rem;right:1.4rem;
+  background:rgba(255,255,255,.05);border:1px solid var(--border);
+  color:var(--ink2);width:38px;height:38px;border-radius:50%;
+  font-size:1.05rem;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.lb-close:hover{background:rgba(194,96,122,.2);color:white;}
+
+@media(max-width:600px){
+  .mosaic-wall{
+    grid-template-columns:repeat(2,1fr);
+    gap:.55rem;
+    max-width:100%;
+  }
+  /* On mobile, t-big stays 2-col; t-wide stays 2-col; t-tall = 1 col */
+  .mosaic-tile.t-tall{grid-row:span 1;aspect-ratio:1/1;}
+}
+@media(max-width:380px){
+  .mosaic-wall{gap:.4rem;}
+}
+
+/* ============================================================
+   VIDEO MESSAGE
+============================================================ */
+.video-frame{
+  width:min(90vw,460px);
+  background:#000;
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  backdrop-filter:blur(8px);
+  box-shadow:0 18px 46px rgba(0,0,0,.3);
+  margin-bottom:.7rem;
+  line-height:0;
+}
+.video-el{
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:0;
+  background:#000;
+  display:block;
+  object-fit:cover;
+}
+.video-caption{
+  font-family:'DM Sans',sans-serif;font-size:.68rem;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--rose3);opacity:.6;
+}
+
+/* ============================================================
+   FINAL CLOSING
+============================================================ */
+.closing-orbit{
+  position:relative;width:220px;height:220px;
+  margin:0 auto 1.6rem;
+  display:flex;align-items:center;justify-content:center;
+}
+.closing-orbit .core{
+  font-size:2.6rem;
+  animation:coreBeat 1.8s ease-in-out infinite;
+  filter:drop-shadow(0 0 18px rgba(232,132,154,0.5));
+  z-index:2;
+}
+@keyframes coreBeat{0%,100%{transform:scale(1);}50%{transform:scale(1.14);}}
+.closing-orbit .ring{
+  position:absolute;inset:0;border-radius:50%;
+  border:1px dashed var(--border2);
+  animation:ringSpin linear infinite;
+}
+.closing-orbit .ring--1{animation-duration:18s;inset:0;}
+.closing-orbit .ring--2{animation-duration:26s;inset:24px;animation-direction:reverse;}
+@keyframes ringSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.closing-orbit .word{
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.82rem;
+  color:var(--gold-soft);opacity:.85;white-space:nowrap;
+}
+.closing-orbit .word--1{top:6%;left:50%;transform:translateX(-50%);}
+.closing-orbit .word--2{bottom:8%;left:8%;}
+.closing-orbit .word--3{bottom:8%;right:4%;}
+.closing-orbit .word--4{top:46%;left:-6%;}
+.closing-orbit .word--5{top:46%;right:-10%;}
+
+.closing-body{
+  font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;
+  line-height:1.95;color:var(--ink2);max-width:560px;margin-bottom:.4rem;
+}
+.closing-foot{
+  font-family:'DM Sans',sans-serif;font-size:.72rem;letter-spacing:.16em;
+  color:var(--ink3);margin-top:2.4rem;
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<canvas id="petal-canvas"></canvas>
+
+<div class="progress-dots" id="progressDots"></div>
+<button class="music-btn" id="musicBtn" title="Toggle musik">🔊</button>
+
+<!-- ============================================================
+     SECTION 1 — GIFT OPENING
+============================================================ -->
+<section class="page page--gift active" id="page-gift">
+
+  <div class="intro-typer" id="introTyper">
+    <span class="intro-typer-text" id="introTyperText"></span><span class="intro-caret">|</span>
+  </div>
+
+  <div class="gift-content" id="giftContent">
+    <p class="eyebrow"><span>✦</span> sebelum kita mulai <span>✦</span></p>
+    <h1 class="sec-title" style="margin-bottom:.7rem;">Ada Sesuatu yang Aku Simpan<br><em>Untukmu</em></h1>
+    <p class="sec-sub" style="max-width:380px;">bukan hadiah yang bisa kamu pegang — hanya sekumpulan hal yang aku syukuri dan belum pernah aku ucapkan dengan lantang</p>
+
+    <div class="gift-container" id="giftBox">
+      <div class="gift-glow"></div>
+      <div class="gift-lid">
+        <div class="lid-shine"></div>
+        <div class="gift-bow">
+          <div class="bow-tail-l"></div>
+          <div class="bow-tail-r"></div>
+          <div class="bow-left"></div>
+          <div class="bow-right"></div>
+          <div class="bow-center"></div>
+        </div>
+      </div>
+      <div class="gift-box-body">
+        <div class="box-dots"></div>
+        <div class="box-shine"></div>
+      </div>
+    </div>
+
+    <p class="gift-hint" id="giftHint"><span>✨</span> ketuk untuk membukanya <span>✨</span></p>
+  </div>
+
+  <audio id="bgMusic" src="3.mp3" preload="auto" loop></audio>
+</section>
+
+<canvas id="burst-canvas"></canvas>
+<div id="burst-layer"></div>
+
+<!-- ============================================================
+     SECTION 2 — GRATITUDE BOOK (3D page-turn)
+============================================================ -->
+<section class="page page--book" id="page-book">
+  <p class="eyebrow">✦ sebuah buku kecil yang aku tulis untukmu ✦</p>
+  <h2 class="sec-title">Buku Kecil <em>Rasa Syukurku</em></h2>
+  <p class="sec-sub">satu halaman, satu alasan aku bersyukur atas kehadiranmu — ketuk untuk membalik</p>
+
+  <div class="book-stage">
+    <div class="book">
+      <div class="book-spine"></div>
+      <div class="book-base">
+        <!-- LEFT static page: cover-ish intro, stays visible under all leaves -->
+        <div class="book-half left">
+          <p class="page-label">Halaman Pembuka</p>
+          <div class="page-photo" style="--photo-tilt:-2deg;">
+            <span class="photo-tape"></span>
+            <img src="2.jpg" alt="Opening memory">
+          </div>
+          <h3 class="page-title">Untuk Semua yang<br>Tidak Sempat Aku Ucapkan</h3>
+          <p class="page-text">Buku ini penuh dengan hal-hal kecil yang selalu aku rasakan tapi jarang pernah aku ungkapkan. Sebagian terasa sepele, sebagian agak memalukan untuk diakui, tapi semuanya nyata. Jadi nikmati saja setiap halamannya, ya? Tidak perlu buru-buru.</p>
+          <span class="page-number">i</span>
+        </div>
+
+        <!-- RIGHT static page: visible once all leaves are flipped -->
+        <div class="book-half right">
+          <p class="page-label">Halaman Penutup</p>
+          <div class="page-photo" style="--photo-tilt:2deg;">
+            <span class="photo-tape"></span>
+            <img src="3.jpg" alt="Closing memory">
+          </div>
+          <h3 class="page-title">Selesai Sudah,<br>Tapi Rasa Ini Tidak</h3>
+          <p class="page-text">Oke, ini halaman terakhir — tapi sejujurnya, ini belum semuanya. Masih banyak yang belum aku tuliskan, karena daftarnya terus bertambah setiap hari yang aku habiskan bersamamu. Anggap saja ini baru jilid pertama.</p>
+          <span class="page-number">x</span>
+        </div>
+
+        <!-- FLIPPABLE LEAVES (rendered back-to-front via z-index, last in DOM = topmost initially) -->
+        <div class="leaf" data-leaf="5">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 9</p>
+            <div class="page-photo" style="--photo-tilt:-2deg;">
+              <span class="photo-tape"></span>
+              <img src="4.jpg" alt="Memory for page 9">
+            </div>
+            <h3 class="page-title">Untuk Caramu Bertahan</h3>
+            <p class="page-text">Aku tahu hidupmu juga tidak selalu mudah. Ada hari-hari ketika kamu mungkin ingin menyerah pada banyak hal, tapi kamu terus memilih untuk bertahan, terus memilih untuk tetap mencintai. Itu bukan hal kecil bagiku — itu keberanian yang diam-diam, dan itu sesuatu yang aku kagumi lebih dari yang pernah aku ungkapkan.</p>
+            <span class="page-number">9</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 10</p>
+            <div class="page-photo" style="--photo-tilt:2deg;">
+              <span class="photo-tape"></span>
+              <img src="12.jpg" alt="Memory for page 10">
+            </div>
+            <h3 class="page-title">Untuk Mimpi yang Kamu Titipkan</h3>
+            <p class="page-text">Kamu sudah mempercayaiku dengan harapan dan rencanamu, hal-hal yang benar-benar kamu pedulikan, bukan hanya yang di permukaan. Sebagian dari mimpi-mimpi itu, kini kita bangun bersama. Aku tidak menganggap itu enteng, dan aku tidak akan menyia-nyiakan kepercayaan yang kamu berikan kepadaku.</p>
+            <span class="page-number">10</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="4">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 7</p>
+            <div class="page-photo" style="--photo-tilt:-1.5deg;">
+              <span class="photo-tape"></span>
+              <img src="9.jpg" alt="Memory for page 7">
+            </div>
+            <h3 class="page-title">Untuk Pesan-Pesan Kecilmu</h3>
+            <p class="page-text">"Udah makan belum", "hati-hati di jalan", "aku di sini kalau kamu butuh" — pesan-pesan kecil itu selalu muncul tepat saat aku membutuhkannya, seolah kamu entah bagaimana tahu. Bukan pesan yang panjang pun, tapi selalu berhasil membuat hariku terasa sedikit lebih ringan, setiap kali.</p>
+            <span class="page-number">7</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 8</p>
+            <div class="page-photo" style="--photo-tilt:1.5deg;">
+              <span class="photo-tape"></span>
+              <img src="10.jpg" alt="Memory for page 8">
+            </div>
+            <h3 class="page-title">Untuk Rasa Aman yang Kamu Beri</h3>
+            <p class="page-text">Di dekatmu, aku tidak perlu berpura-pura baik-baik saja ketika tidak. Kamu memberi ruang untukku berantakan kadang-kadang, untuk tidak punya segalanya, tanpa membuatku merasa dihakimi. Rasa aman seperti itu sejujurnya adalah salah satu hal terbaik yang pernah diberikan siapa pun kepadaku.</p>
+            <span class="page-number">8</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="3">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 5</p>
+            <div class="page-photo" style="--photo-tilt:-2.5deg;">
+              <span class="photo-tape"></span>
+              <img src="6.jpg" alt="Memory for page 5">
+            </div>
+            <h3 class="page-title">Untuk Caramu Mendengarkan</h3>
+            <p class="page-text">Kamu mendengarkan ceritaku bahkan ketika aku mengulang hal yang sama, bahkan ketika apa yang aku katakan tidak terlalu penting. Kamu tidak menyela atau memotongku, dan tidak pernah membuatku merasa aku terlalu banyak bicara. Jujur, itu sesuatu yang langka, dan aku selalu menyadarinya setiap kali.</p>
+            <span class="page-number">5</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 6</p>
+            <div class="page-photo" style="--photo-tilt:2.5deg;">
+              <span class="photo-tape"></span>
+              <img src="15.jpg" alt="Memory for page 6">
+            </div>
+            <h3 class="page-title">Untuk Caramu Melihatku</h3>
+            <p class="page-text">Kamu tidak hanya melihatku di hari-hari baikku. Kamu sudah melihatku lelah, frustrasi, tidak benar-benar baik-baik saja — dan kamu tetap memilih untuk tinggal. Dilihat seperti itu, sepenuhnya, tanpa harus berpura-pura, adalah sesuatu yang sungguh aku syukuri.</p>
+            <span class="page-number">6</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="2">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 3</p>
+            <div class="page-photo" style="--photo-tilt:-1deg;">
+              <span class="photo-tape"></span>
+              <img src="4.jpg" alt="Memory for page 3">
+            </div>
+            <h3 class="page-title">Untuk Hal-Hal Kecil yang Kamu Ingat</h3>
+            <p class="page-text">Kamu ingat hal-hal seperti minuman favoritku, atau satu hari yang berat dua minggu lalu yang hampir tidak aku sebut. Detail-detail kecil yang kamu pegang itu yang membuatku merasa kamu benar-benar memperhatikan, bukan sekadar mendengar karena kebiasaan.</p>
+            <span class="page-number">3</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 4</p>
+            <div class="page-photo" style="--photo-tilt:1deg;">
+              <span class="photo-tape"></span>
+              <img src="5.jpg" alt="Memory for page 4">
+            </div>
+            <h3 class="page-title">Untuk Kesabaranmu Padaku</h3>
+            <p class="page-text">Aku tidak selalu mudah dihadapi, aku tahu itu. Tapi kamu memilih kesabaran daripada menyerah, kamu memilih berbicara daripada pergi. Cinta seperti itu tidak selalu terlihat keras atau jelas, tapi aku merasakannya setiap kali, bahkan ketika aku tidak mengatakannya.</p>
+            <span class="page-number">4</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+        <div class="leaf" data-leaf="1">
+          <div class="leaf-face leaf-front">
+            <p class="page-label">Halaman 1</p>
+            <div class="page-photo" style="--photo-tilt:-2deg;">
+              <span class="photo-tape"></span>
+              <img src="3.jpg" alt="Memory for page 1">
+            </div>
+            <h3 class="page-title">Untuk Waktu yang Kamu Berikan</h3>
+            <p class="page-text">Waktu adalah satu hal yang tidak bisa dikembalikan, dan kamu terus memilih untuk menghabiskannya bersamaku — bahkan dengan semua yang sedang berjalan, semua hal lain yang menarik perhatianmu. Aku tidak akan pura-pura itu sesuatu yang biasa atau yang aku layak dapatkan begitu saja. Itu berarti banyak, lebih dari yang biasanya aku tunjukkan.</p>
+            <span class="page-number">1</span>
+            <span class="cover-hint">ketuk untuk balik ⟲</span>
+          </div>
+          <div class="leaf-face leaf-back">
+            <p class="page-label">Halaman 2</p>
+            <div class="page-photo" style="--photo-tilt:2deg;">
+              <span class="photo-tape"></span>
+              <img src="11.jpg" alt="Memory for page 2">
+            </div>
+            <h3 class="page-title">Untuk Caramu Tetap Memilihku</h3>
+            <p class="page-text">Dari semua pilihan dan kemungkinan yang ada di luar sana, kamu terus memilih untuk ada di sini, bersamaku. Itu terjadi setiap hari, dengan tenang, tanpa membesar-besarkannya — dan itulah tepatnya mengapa aku merasa begitu beruntung, setiap kali aku berhenti dan memikirkannya.</p>
+            <span class="page-number">2</span>
+            <span class="back-hint">⟲ ketuk untuk kembali</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <p class="book-progress" id="bookProgress">halaman <strong>0</strong> dari <strong>10</strong> dibuka</p>
+  <button class="btn btn-next hidden" id="bookNextBtn" data-next="page-letter">Lanjut ⟶</button>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — LETTER WITH WAX SEAL
+============================================================ -->
+<section class="page page--letter" id="page-letter">
+  <p class="eyebrow">✦ satu hal lagi sebelum kita lanjut ✦</p>
+  <h2 class="sec-title">Sebuah Surat <em>untuk kamu sayang</em></h2>
+  <p class="sec-sub">ada hal-hal yang lebih mudah ditulis daripada diucapkan</p>
+
+  <div class="envelope-wrap" id="envelopeWrap">
+    <div class="envelope" id="envelope">
+      <div class="envelope-back"></div>
+      <div class="letter-paper" id="letterPaper">
+        <p class="letter-text">Hei, kamu —</p>
+        <p class="letter-text">
+          Ada setumpuk rasa syukur yang terus menumpuk di kepalaku
+          hampir setiap hari, tapi kebanyakan waktu aku tidak tahu cara
+          mengungkapkannya tanpa terdengar terlalu dramatis. Jadi aku pikir
+          lebih baik aku tuliskan saja.
+        </p>
+        <p class="letter-text">
+          Aku merasa beruntung. Bukan karena segalanya sempurna atau selalu mudah —
+          memang tidak — tapi karena di tengah semua bagian hidup yang berantakan
+          dan belum selesai ini, aku punya kamu untuk melewatinya bersama.
+          Jujur, itu sudah lebih dari cukup bagiku.
+        </p>
+        <p class="letter-text">
+          Terima kasih sudah bertahan di hari-hari ketika aku sulit dihadapi,
+          karena percaya kepadaku bahkan ketika aku tidak percaya pada diriku sendiri,
+          dan karena mencintaiku dengan cara yang sederhana tapi entah kenapa
+          selalu terasa sangat berarti.
+        </p>
+        <p class="letter-text">
+          Semoga surat kecil ini cukup menyampaikan apa yang biasanya aku simpan
+          sendiri: aku bersyukur, hari ini dan setiap hari, hanya karena kamu ada di sini.
+        </p>
+        <p class="letter-signoff">milikmu, selalu bersyukur</p>
+      </div>
+      <div class="envelope-flap"></div>
+      <div class="wax-seal" id="waxSeal">♡</div>
+    </div>
+  </div>
+
+  <p class="letter-hint" id="letterHint">⋆ tap the envelope to open it ♡</p>
+  <button class="btn btn-next hidden" id="letterNextBtn" data-next="page-gallery">Continue to Memories ⟶</button>
+</section>
+
+<!-- ============================================================
+     SECTION 4 — MOSAIC GALLERY
+============================================================ -->
+<section class="page page--gallery" id="page-gallery">
+  <p class="eyebrow">✦ pieced together, one by one ✦</p>
+  <h2 class="sec-title">Our Memory <em>Wall</em></h2>
+  <p class="sec-sub">every little piece of this is part of why I'm grateful</p>
+
+  <div class="mosaic-wall" id="mosaicWall">
+    <div class="mosaic-tile t-big" style="--tilt:-1deg" data-cap="the one I look back on the most" onclick="openLb(this)">
+      <img src="7.jpg" alt="Memory 1">
+      <div class="tile-cap">the one I look back on the most</div>
+    </div>
+    <div class="mosaic-tile t-wide" style="--tilt:1deg" data-cap="such a simple moment, but it felt special" onclick="openLb(this)">
+      <img src="13.jpg" alt="Memory 2">
+      <div class="tile-cap">such a simple moment, but it felt special</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:-2deg" data-cap="my favorite kind of laugh" onclick="openLb(this)">
+      <img src="15.jpg" alt="Memory 3">
+      <div class="tile-cap">my favorite kind of laugh</div>
+    </div>
+    <div class="mosaic-tile t-tall" style="--tilt:1.5deg" data-cap="you, just being there, is always enough" onclick="openLb(this)">
+      <img src="16.jpg" alt="Memory 4">
+      <div class="tile-cap">you, just being there, is always enough</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:-1deg" data-cap="small thing, big meaning" onclick="openLb(this)">
+      <img src="21.jpg" alt="Memory 5">
+      <div class="tile-cap">small thing, big meaning</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:2deg" data-cap="feels like coming home" onclick="openLb(this)">
+      <img src="5.jpg" alt="Memory 6">
+      <div class="tile-cap">feels like coming home</div>
+    </div>
+    <div class="mosaic-tile t-wide" style="--tilt:-1.5deg" data-cap="a memory I keep close" onclick="openLb(this)">
+      <img src="14.jpg" alt="Memory 7">
+      <div class="tile-cap">a memory I keep close</div>
+    </div>
+    <div class="mosaic-tile" style="--tilt:1deg" data-cap="grateful for today" onclick="openLb(this)">
+      <img src="3.jpg" alt="Memory 8">
+      <div class="tile-cap">grateful for today</div>
+    </div>
+  </div>
+
+  <p class="gallery-words">✦ lucky, quietly, in every single one of these ✦</p>
+  <button class="btn btn-next" data-next="page-video">Continue to the Message ⟶</button>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lbClose">✕</button>
+  <img id="lbImg" src="" alt="">
+  <p class="lb-cap" id="lbCap"></p>
+</div>
+
+<!-- ============================================================
+     SECTION 5 — VIDEO MESSAGE
+============================================================ -->
+<section class="page page--video" id="page-video">
+  <p class="eyebrow">✦ for this last part, let my voice do the talking ✦</p>
+  <h2 class="sec-title">A Message, <em>Out Loud</em></h2>
+
+  <div class="video-frame">
+    <video class="video-el" id="storyVideo" src="12.mp4" controls playsinline poster="">
+      Your browser doesn't support the video tag.
+    </video>
+  </div>
+
+  <p class="video-caption">grateful, this time in actual words and motion ⟶</p>
+  <button class="btn btn-next" data-next="page-final">Continue to the Last Page ⟶</button>
+</section>
+
+<!-- ============================================================
+     SECTION 6 — FINAL CLOSING
+============================================================ -->
+<section class="page page--final" id="page-final">
+  <p class="eyebrow">✦ a closing, not an ending ✦</p>
+
+  <div class="closing-orbit">
+    <div class="ring ring--1"></div>
+    <div class="ring ring--2"></div>
+    <span class="word word--1">grateful</span>
+    <span class="word word--2">lucky</span>
+    <span class="word word--3">thank you</span>
+    <span class="word word--4">always</span>
+    <span class="word word--5">you</span>
+    <span class="core">💗</span>
+  </div>
+
+  <h2 class="sec-title">Thank You, <em>Love</em></h2>
+  <div class="line-deco"></div>
+  <p class="closing-body">
+    The book's been read, the letter's open, and the memories are all
+    laid out now. But honestly, the way I feel about you doesn't stop
+    at the last page — it just keeps adding up, every single day I get
+    to spend with you.
+  </p>
+  <p class="closing-body">
+    Thank you for being a big part of why I feel this lucky. I'm going
+    to keep trying to be someone who deserves all the good you bring
+    into my life, today and for as long as we've got.
+  </p>
+  <p class="closing-foot">made with a kind of gratitude that doesn't really run out, just for you ♡</p>
+</section>
+
+<script>
+/* ============================================================
+   INTRO TYPER — personal greeting typed out before gift appears
+   Edit PARTNER_NAME below to personalize it.
+============================================================ */
+const PARTNER_NAME = "Sayang"; // <-- ganti dengan nama pasangan kamu
+const INTRO_LINES = [
+  `untukmu, ${PARTNER_NAME}...`,
+  `yang membuat hari-hari biasa terasa istimewa...`
+];
+
+(function runIntroTyper(){
+  const typerEl = document.getElementById('introTyper');
+  const textEl = document.getElementById('introTyperText');
+  const giftContent = document.getElementById('giftContent');
+  if(!typerEl || !textEl || !giftContent) return;
+
+  let lineIndex = 0;
+
+  function typeLine(line, onDone){
+    let i = 0;
+    textEl.textContent = '';
+    const speed = 55;
+    const interval = setInterval(()=>{
+      textEl.textContent += line.charAt(i);
+      i++;
+      if(i >= line.length){
+        clearInterval(interval);
+        setTimeout(onDone, 750);
+      }
+    }, speed);
+  }
+
+  function nextLine(){
+    if(lineIndex >= INTRO_LINES.length){
+      typerEl.classList.add('done');
+      setTimeout(()=>{
+        giftContent.classList.add('visible');
+      }, 350);
+      return;
+    }
+    typeLine(INTRO_LINES[lineIndex], ()=>{
+      lineIndex++;
+      if(lineIndex < INTRO_LINES.length){
+        // fade text out briefly between lines
+        textEl.style.transition = 'opacity .3s ease';
+        textEl.style.opacity = '0';
+        setTimeout(()=>{
+          textEl.style.opacity = '1';
+          nextLine();
+        }, 350);
+      } else {
+        nextLine();
+      }
+    });
+  }
+
+  nextLine();
+})();
+</script>
+
+<script>
+/* ============================================================
+   MICRO SOUND EFFECTS — synthesized tones + real paper-slide samples
+============================================================ */
+const SFX = (function(){
+  let ctx = null;
+  function getCtx(){
+    if(!ctx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(AC) ctx = new AC();
+    }
+    if(ctx && ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+
+  function tone(freq, duration, opts={}){
+    const c = getCtx();
+    if(!c) return;
+    const t0 = c.currentTime;
+    const osc = c.createOscillator();
+    const gain = c.createGain();
+    osc.type = opts.type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    if(opts.glideTo){
+      osc.frequency.exponentialRampToValueAtTime(opts.glideTo, t0 + duration);
+    }
+    const peak = opts.volume ?? 0.12;
+    gain.gain.setValueAtTime(0, t0);
+    gain.gain.linearRampToValueAtTime(peak, t0 + (opts.attack || 0.012));
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+    osc.connect(gain);
+    gain.connect(c.destination);
+    osc.start(t0);
+    osc.stop(t0 + duration + 0.05);
+  }
+
+  function noiseBurst(duration, opts={}){
+    const c = getCtx();
+    if(!c) return;
+    const t0 = c.currentTime;
+    const bufferSize = Math.max(1, Math.floor(c.sampleRate * duration));
+    const buffer = c.createBuffer(1, bufferSize, c.sampleRate);
+    const data = buffer.getChannelData(0);
+    const shape = opts.shape || 'fadeOut';
+    for(let i=0;i<bufferSize;i++){
+      const p = i/bufferSize;
+      let env;
+      if(shape === 'humpMid'){
+        env = Math.sin(p*Math.PI);
+      } else if(shape === 'flat'){
+        env = 1;
+      } else {
+        env = Math.pow(1 - p, 1.6);
+      }
+      data[i] = (Math.random()*2-1) * env;
+    }
+    const src = c.createBufferSource();
+    src.buffer = buffer;
+    const filter = c.createBiquadFilter();
+    filter.type = opts.filterType || 'highpass';
+    const f0 = opts.filterFreq ?? 1200;
+    const f1 = opts.filterFreqTo;
+    filter.frequency.setValueAtTime(f0, t0);
+    if(f1){
+      filter.frequency.linearRampToValueAtTime(f1, t0 + duration);
+    }
+    if(opts.q) filter.Q.value = opts.q;
+    const gain = c.createGain();
+    const vol = opts.volume ?? 0.06;
+    gain.gain.setValueAtTime(0, t0);
+    gain.gain.linearRampToValueAtTime(vol, t0 + (opts.attack || 0.008));
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+    src.connect(filter);
+    filter.connect(gain);
+    gain.connect(c.destination);
+    src.start(t0);
+    return t0;
+  }
+
+  // --- Real recorded-style paper-slide samples (granular-synthesized, rendered to MP3) ---
+  // Three slight variations so repeated page flips don't sound identical.
+  const PAPER_SAMPLES_B64 = [
+    "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"
+  ];
+  const paperBuffers = [null, null, null];
+  let paperLoadStarted = false;
+
+  function loadPaperBuffers(){
+    if(paperLoadStarted) return;
+    paperLoadStarted = true;
+    const c = getCtx();
+    if(!c) return;
+    PAPER_SAMPLES_B64.forEach((b64, idx)=>{
+      try {
+        const binary = atob(b64);
+        const bytes = new Uint8Array(binary.length);
+        for(let i=0;i<binary.length;i++) bytes[i] = binary.charCodeAt(i);
+        c.decodeAudioData(bytes.buffer, (decoded)=>{
+          paperBuffers[idx] = decoded;
+        }, ()=>{ /* decode failed silently — falls back to synth */ });
+      } catch(e) { /* atob or decode failed — falls back to synth */ }
+    });
+  }
+
+  function playPaperSample(){
+    const c = getCtx();
+    if(!c) return false;
+    const available = paperBuffers.filter(b=>b);
+    if(available.length === 0) return false;
+    const buf = available[Math.floor(Math.random()*available.length)];
+    const src = c.createBufferSource();
+    src.buffer = buf;
+    const gain = c.createGain();
+    gain.gain.value = 0.9;
+    src.connect(gain);
+    gain.connect(c.destination);
+    src.start(0);
+    return true;
+  }
+
+  return {
+    giftOpen(){
+      tone(523.25, 0.5, {type:'sine', volume:0.1, glideTo:880});
+      setTimeout(()=> tone(659.25, 0.45, {type:'sine', volume:0.08}), 90);
+      setTimeout(()=> tone(987.77, 0.5, {type:'sine', volume:0.06}), 180);
+    },
+    // realistic paper-slide / page-turn sound — plays a real granular-synthesized
+    // paper sample; falls back to the layered synth version if decoding isn't ready yet
+    pageFlip(){
+      loadPaperBuffers();
+      const played = playPaperSample();
+      if(played) return;
+
+      // fallback (used only if the sample hasn't finished decoding yet)
+      noiseBurst(0.07, {shape:'humpMid', filterType:'highpass', filterFreq:2200, filterFreqTo:3200, volume:0.045, attack:0.004});
+      setTimeout(()=>{
+        noiseBurst(0.26, {shape:'humpMid', filterType:'bandpass', filterFreq:2600, filterFreqTo:1100, q:0.7, volume:0.06, attack:0.01});
+      }, 35);
+      setTimeout(()=>{
+        noiseBurst(0.18, {shape:'fadeOut', filterType:'highpass', filterFreq:1800, filterFreqTo:900, volume:0.035});
+      }, 90);
+      setTimeout(()=>{
+        noiseBurst(0.09, {shape:'fadeOut', filterType:'lowpass', filterFreq:500, volume:0.05, attack:0.002});
+        tone(180, 0.07, {type:'triangle', volume:0.02, attack:0.002});
+      }, 230);
+    },
+    // gentle two-note chime — envelope / letter open
+    letterOpen(){
+      tone(587.33, 0.35, {type:'sine', volume:0.08});
+      setTimeout(()=> tone(880, 0.4, {type:'sine', volume:0.07}), 140);
+    },
+    // soft pop/click — generic UI tap (buttons)
+    softPop(){
+      tone(440, 0.09, {type:'sine', volume:0.07, attack:0.005, glideTo:660});
+    },
+    // tiny shutter-ish click — gallery photo tap
+    photoTap(){
+      tone(700, 0.06, {type:'square', volume:0.025});
+    }
+  };
+})();
+</script>
+
+<script>
+/* ============================================================
+   PAGE NAVIGATION SYSTEM
+============================================================ */
+const PAGE_ORDER = ['page-gift','page-book','page-letter','page-gallery','page-video','page-final'];
+const pages = document.querySelectorAll('.page');
+const dotsWrap = document.getElementById('progressDots');
+
+PAGE_ORDER.forEach((id,i)=>{
+  const dot = document.createElement('span');
+  dot.dataset.id = id;
+  dotsWrap.appendChild(dot);
+});
+
+function showPage(id){
+  pages.forEach(p=>p.classList.toggle('active', p.id===id));
+  const idx = PAGE_ORDER.indexOf(id);
+  [...dotsWrap.children].forEach((d,i)=>{
+    d.classList.remove('now','done');
+    if(i<idx) d.classList.add('done');
+    if(i===idx) d.classList.add('now');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+showPage('page-gift');
+
+document.querySelectorAll('[data-next]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    SFX.softPop();
+    showPage(btn.getAttribute('data-next'));
+  });
+});
+
+/* ============================================================
+   MUSIC
+============================================================ */
+const bgMusic = document.getElementById('bgMusic');
+const musicBtn = document.getElementById('musicBtn');
+let musicPlaying = false;
+
+function startMusic(){
+  if(musicPlaying || !bgMusic) return;
+  bgMusic.volume = 0;
+  bgMusic.play().then(()=>{
+    musicPlaying = true;
+    musicBtn.textContent = '🔊';
+    musicBtn.classList.remove('muted');
+    let v = 0;
+    const fade = setInterval(()=>{
+      v += 0.04;
+      bgMusic.volume = Math.min(v, 0.6);
+      if(v>=0.6) clearInterval(fade);
+    }, 120);
+  }).catch(()=>{ /* autoplay blocked or file missing — silent */ });
+}
+
+musicBtn.addEventListener('click', ()=>{
+  if(!bgMusic) return;
+  if(musicPlaying){
+    bgMusic.pause();
+    musicPlaying = false;
+    musicBtn.textContent = '🔇';
+    musicBtn.classList.add('muted');
+  } else {
+    startMusic();
+  }
+});
+
+/* ============================================================
+   GIFT BOX — CINEMATIC OPEN SEQUENCE
+============================================================ */
+const EMOJIS = ['🌸','🌺','🌹','🌷','🌼','🪷','✦','✧','💗','🤍','✨','🌸','🌺'];
+let giftOpened = false;
+
+function openGift(){
+  if(giftOpened) return;
+  giftOpened = true;
+
+  const gift = document.getElementById('giftBox');
+  const hint = document.getElementById('giftHint');
+  const layer = document.getElementById('burst-layer');
+  const bc = document.getElementById('burst-canvas');
+  const bx = bc.getContext('2d');
+
+  bc.width = window.innerWidth;
+  bc.height = window.innerHeight;
+
+  const rect = gift.getBoundingClientRect();
+  const ox = rect.left + rect.width/2;
+  const oy = rect.top + rect.height*0.2;
+
+  startMusic();
+  SFX.giftOpen();
+  hint.textContent = '✨ thanks for opening this ✨';
+
+  const lid = gift.querySelector('.gift-lid');
+  const box = gift.querySelector('.gift-box-body');
+  const bow = gift.querySelector('.gift-bow');
+  gift.getBoundingClientRect();
+
+  lid.animate([
+    {transform:'translateX(-50%) translateY(0px) rotate(0deg)', opacity:1},
+    {transform:'translateX(-70%) translateY(-55px) rotate(-15deg)', opacity:1, offset:.35},
+    {transform:'translateX(-80%) translateY(-170px) rotate(-30deg)', opacity:0, offset:1}
+  ], {duration:500, easing:'cubic-bezier(0.25,0.46,0.45,0.94)', fill:'forwards'});
+
+  bow.animate([
+    {transform:'translateX(-50%) translateY(0px) rotate(0deg)', opacity:1},
+    {transform:'translateX(-70%) translateY(-55px) rotate(-15deg)', opacity:1, offset:.35},
+    {transform:'translateX(-80%) translateY(-170px) rotate(-30deg)', opacity:0, offset:1}
+  ], {duration:500, easing:'cubic-bezier(0.25,0.46,0.45,0.94)', fill:'forwards'});
+
+  setTimeout(()=>{
+    box.animate([
+      {transform:'translateX(0px) rotate(0deg)'},
+      {transform:'translateX(-5px) rotate(-2deg)', offset:.2},
+      {transform:'translateX(5px) rotate(2deg)', offset:.4},
+      {transform:'translateX(-3px) rotate(-1deg)', offset:.6},
+      {transform:'translateX(3px) rotate(1deg)', offset:.8},
+      {transform:'translateX(0px) rotate(0deg)'}
+    ], {duration:400, easing:'ease-in-out'});
+  }, 80);
+
+  setTimeout(()=>{
+    layer.style.display = 'block';
+    bc.style.display = 'block';
+    spawnFlowers(ox, oy, layer, 0, 45);
+    spawnFlowers(ox, oy, layer, 230, 28);
+    spawnFlowers(ox, oy, layer, 500, 18);
+    spawnDots(ox, oy, bc, bx);
+  }, 480);
+
+  setTimeout(()=>{
+    doTransition(layer, bc, bx);
+  }, 5400);
+}
+
+document.getElementById('giftBox').addEventListener('click', openGift);
+
+function spawnFlowers(ox, oy, layer, startDelay, count){
+  for(let i=0;i<count;i++){
+    setTimeout(()=>{
+      const el = document.createElement('div');
+      const size = Math.random()*26+18;
+      el.style.cssText = `position:fixed;left:${ox}px;top:${oy}px;font-size:${size}px;line-height:1;pointer-events:none;z-index:620;will-change:transform,opacity;opacity:0;`;
+      el.textContent = EMOJIS[Math.floor(Math.random()*EMOJIS.length)];
+      layer.appendChild(el);
+
+      const launchVX = (Math.random()-0.5)*580;
+      const launchVY = -(Math.random()*680+380);
+      const drag = 0.988;
+      const gravity = 155+Math.random()*95;
+      const swayAmp = (Math.random()-0.5)*150;
+      const swayFreq = 0.5+Math.random()*1.0;
+      const rotStart = Math.random()*360;
+      const rotSpeed = (Math.random()-0.5)*340;
+      const lifetime = 4300+Math.random()*1400;
+
+      let vx=launchVX, vy=launchVY, px=0, py=0, born=null;
+
+      function tick(ts){
+        if(!born) born = ts;
+        const elapsed = ts-born;
+        const t = elapsed/1000;
+        const progress = elapsed/lifetime;
+        if(progress>=1){ el.remove(); return; }
+        const dt = 0.016;
+        vx *= drag; vy = vy*drag + gravity*dt;
+        px += vx*dt; py += vy*dt;
+        const swayX = Math.sin(t*swayFreq*Math.PI*2)*swayAmp*Math.min(t*2,1);
+        const rot = rotStart + rotSpeed*t;
+        const sc = Math.min(elapsed/60,1);
+        const op = elapsed<60 ? elapsed/60 : (progress<0.65 ? 1 : Math.max(0,1-(progress-0.65)/0.35));
+        el.style.transform = `translate(calc(${px+swayX}px - 50%), calc(${py}px - 50%)) rotate(${rot}deg) scale(${sc})`;
+        el.style.opacity = op;
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }, startDelay + Math.random()*170);
+  }
+}
+
+function spawnDots(ox, oy, bc, bx){
+  const cols = ['#f5b8c8','#e8849a','#c2607a','#ecd2b6','#ffffff','#e3c39a'];
+  const particles = [];
+  for(let i=0;i<200;i++){
+    const a = Math.random()*Math.PI*2;
+    const spd = Math.random()*15+4;
+    const isDot = i<150;
+    particles.push({
+      kind: isDot?'dot':'streak', x:ox,y:oy,px:ox,py:oy,
+      vx:Math.cos(a)*spd, vy:Math.sin(a)*spd-(Math.random()*8+2),
+      grav:isDot?0.22+Math.random()*0.13:0.13,
+      drag:0.96+Math.random()*0.02,
+      col:cols[Math.floor(Math.random()*cols.length)],
+      r:Math.random()*4+1.4, op:1,
+      decay:isDot?0.004+Math.random()*0.005:0.011+Math.random()*0.01,
+      trail:[]
+    });
+  }
+  function dotTick(){
+    bx.clearRect(0,0,bc.width,bc.height);
+    let alive = false;
+    for(const p of particles){
+      if(p.op<=0) continue;
+      alive = true;
+      p.trail.push({x:p.x,y:p.y});
+      if(p.trail.length>6) p.trail.shift();
+      p.px=p.x; p.py=p.y;
+      p.vx*=p.drag; p.vy=p.vy*p.drag+p.grav;
+      p.x+=p.vx; p.y+=p.vy; p.op-=p.decay;
+      if(p.kind==='dot'){
+        for(let t=0;t<p.trail.length;t++){
+          bx.globalAlpha = Math.max(0,p.op*(t/p.trail.length)*0.3);
+          bx.fillStyle = p.col;
+          bx.beginPath();
+          bx.arc(p.trail[t].x,p.trail[t].y,p.r*(t/p.trail.length),0,Math.PI*2);
+          bx.fill();
+        }
+        bx.globalAlpha = Math.max(0,p.op);
+        bx.fillStyle = p.col;
+        bx.beginPath(); bx.arc(p.x,p.y,p.r,0,Math.PI*2); bx.fill();
+      } else {
+        bx.globalAlpha = Math.max(0,p.op*0.7);
+        bx.strokeStyle = p.col; bx.lineWidth=2; bx.lineCap='round';
+        bx.beginPath(); bx.moveTo(p.px,p.py); bx.lineTo(p.x,p.y); bx.stroke();
+      }
+    }
+    bx.globalAlpha = 1;
+    if(alive) requestAnimationFrame(dotTick);
+    else { bc.style.display='none'; bx.clearRect(0,0,bc.width,bc.height); }
+  }
+  requestAnimationFrame(dotTick);
+}
+
+function doTransition(layer, bc, bx){
+  const overlay = document.createElement('div');
+  overlay.style.cssText = `position:fixed;inset:0;z-index:800;pointer-events:none;opacity:0;background:#100a10;transition:opacity 1.3s cubic-bezier(0.4,0,0.2,1);`;
+  document.body.appendChild(overlay);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{ overlay.style.opacity='1'; }));
+  setTimeout(()=>{
+    showPage('page-book');
+    layer.style.display='none'; layer.innerHTML='';
+    bc.style.display='none'; bx.clearRect(0,0,bc.width,bc.height);
+    overlay.style.transition='opacity 1s ease';
+    overlay.style.opacity='0';
+    setTimeout(()=>overlay.remove(), 1100);
+  }, 1400);
+}
+
+/* ============================================================
+   GRATITUDE BOOK — page-turn logic
+============================================================ */
+const leaves = Array.from(document.querySelectorAll('.leaf')).sort((a,b)=>
+  parseInt(a.dataset.leaf) - parseInt(b.dataset.leaf)
+); // sorted ascending: index0 = leaf "1" (topmost, flipped first) ... index4 = leaf "5" (bottom, flipped last)
+const bookProgress = document.getElementById('bookProgress');
+const bookNextBtn = document.getElementById('bookNextBtn');
+let flippedCount = 0;
+
+// z-index stacking: dynamically updated so that:
+//  - on the right (unflipped) side, the next leaf to flip forward is on top
+//  - on the left (flipped) side, the most recently flipped leaf is on top
+//    (so clicking the left side always hits the correct "go back" target)
+function updateZIndex(){
+  const unflipped = leaves.filter(l=>!l.classList.contains('flipped'));
+  const flippedLeaves = leaves.filter(l=>l.classList.contains('flipped'));
+
+  // unflipped leaves: earlier in order (lower data-leaf) sits on top
+  unflipped.forEach((leaf,i)=>{
+    leaf.style.zIndex = 50 - i;
+  });
+  // flipped leaves: the one flipped most recently (last in flip order) sits on top
+  flippedLeaves.forEach((leaf,i)=>{
+    leaf.style.zIndex = 20 + i;
+  });
+}
+updateZIndex();
+
+function flipLeaf(leaf){
+  if(leaf.classList.contains('flipped')) return;
+  // Only allow flipping the current topmost unflipped leaf
+  const unflipped = leaves.filter(l=>!l.classList.contains('flipped'));
+  if(unflipped[0] !== leaf) return;
+
+  SFX.pageFlip();
+  leaf.classList.add('flipped');
+  leaf.dataset.flipOrder = String(flipOrderCounter++);
+  flippedCount++;
+  bookProgress.innerHTML = `page <strong>${flippedCount*2}</strong> of <strong>10</strong> opened`;
+  bookNextBtn.classList.add('hidden');
+  updateZIndex();
+
+  if(flippedCount === leaves.length){
+    setTimeout(()=> bookNextBtn.classList.remove('hidden'), 600);
+  }
+}
+
+let flipOrderCounter = 1;
+
+function unflipLeaf(leaf){
+  if(!leaf.classList.contains('flipped')) return;
+  // Only allow unflipping the most recently flipped leaf (the one currently
+  // resting on the left side, on top of the other flipped leaves)
+  const flippedLeaves = leaves
+    .filter(l=>l.classList.contains('flipped'))
+    .sort((a,b)=> parseInt(a.dataset.flipOrder||0) - parseInt(b.dataset.flipOrder||0));
+  const topFlipped = flippedLeaves[flippedLeaves.length-1];
+  if(topFlipped !== leaf) return;
+
+  SFX.pageFlip();
+  leaf.classList.remove('flipped');
+  delete leaf.dataset.flipOrder;
+  flippedCount--;
+  bookProgress.innerHTML = `page <strong>${flippedCount*2}</strong> of <strong>10</strong> opened`;
+  bookNextBtn.classList.add('hidden');
+  updateZIndex();
+}
+
+leaves.forEach(leaf=>{
+  leaf.addEventListener('click', (e)=>{
+    if(leaf.classList.contains('flipped')){
+      // leaf is resting on the left side — clicking it turns back a page
+      unflipLeaf(leaf);
+    } else {
+      // leaf is on the right side, unflipped — clicking it turns forward
+      flipLeaf(leaf);
+    }
+  });
+});
+
+/* ============================================================
+   LETTER ENVELOPE
+============================================================ */
+const envelope = document.getElementById('envelope');
+const letterHint = document.getElementById('letterHint');
+const letterNextBtn = document.getElementById('letterNextBtn');
+
+envelope.addEventListener('click', ()=>{
+  if(envelope.classList.contains('opened')) return;
+  SFX.letterOpen();
+  envelope.classList.add('opened');
+  letterHint.textContent = '✦ hope this reaches you ♡ ✦';
+  setTimeout(()=> letterNextBtn.classList.remove('hidden'), 500);
+});
+
+/* ============================================================
+   MOSAIC GALLERY — reveal on view + lightbox
+============================================================ */
+const tiles = document.querySelectorAll('.mosaic-tile');
+const tileObs = new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=> e.target.classList.add('in-view'), i*70);
+      tileObs.unobserve(e.target);
+    }
+  });
+}, {threshold:0.15});
+tiles.forEach(t=>tileObs.observe(t));
+
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCap = document.getElementById('lbCap');
+document.getElementById('lbClose').onclick = ()=> lb.classList.remove('open');
+lb.addEventListener('click', e=>{ if(e.target===lb) lb.classList.remove('open'); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') lb.classList.remove('open'); });
+
+function openLb(tile){
+  const img = tile.querySelector('img');
+  if(img){
+    SFX.photoTap();
+    lbImg.src = img.src;
+    lbImg.alt = tile.dataset.cap || '';
+    lbCap.textContent = tile.dataset.cap || '';
+    lb.classList.add('open');
+  }
+}
+
+/* ============================================================
+   VIDEO <-> MUSIC SYNC
+============================================================ */
+const storyVideo = document.getElementById('storyVideo');
+let bgWasPlaying = false;
+if(storyVideo){
+  storyVideo.addEventListener('play', ()=>{
+    if(bgMusic && !bgMusic.paused){ bgWasPlaying = true; bgMusic.pause(); }
+  });
+  const resume = ()=>{
+    if(bgWasPlaying && bgMusic){ bgMusic.play().catch(()=>{}); bgWasPlaying = false; }
+  };
+  storyVideo.addEventListener('pause', resume);
+  storyVideo.addEventListener('ended', resume);
+}
+
+/* ============================================================
+   AMBIENT BACKGROUND CANVAS — stars, aurora orbs, dust
+============================================================ */
+const bgCanvas = document.getElementById('bg-canvas');
+const bgCtx = bgCanvas.getContext('2d');
+function bgResize(){ bgCanvas.width = window.innerWidth; bgCanvas.height = window.innerHeight; }
+bgResize(); window.addEventListener('resize', bgResize);
+
+const stars = [];
+for(let i=0;i<150;i++){
+  stars.push({
+    x:Math.random()*bgCanvas.width, y:Math.random()*bgCanvas.height,
+    r:Math.random()*1.2+0.2, op:Math.random()*0.7+0.1,
+    twinkleSpeed:Math.random()*0.02+0.005, twinkleOffset:Math.random()*Math.PI*2,
+    color: Math.random()<0.3?'#f5b8c8':Math.random()<0.5?'#e3c39a':'#ffffff'
+  });
+}
+
+const orbs = [
+  {x:.25,y:.3,r:.32,col:'rgba(194,96,122,',baseOp:.07,speed:.00018,angle:0},
+  {x:.75,y:.6,r:.28,col:'rgba(139,80,55,',baseOp:.08,speed:.00022,angle:2.1},
+  {x:.5,y:.15,r:.22,col:'rgba(201,149,108,',baseOp:.06,speed:.00014,angle:4.2},
+  {x:.15,y:.75,r:.2,col:'rgba(194,96,122,',baseOp:.05,speed:.0002,angle:1.0},
+  {x:.85,y:.2,r:.18,col:'rgba(100,60,40,',baseOp:.08,speed:.00016,angle:3.5},
+];
+
+const dust = [];
+for(let i=0;i<55;i++){
+  dust.push({
+    x:Math.random()*bgCanvas.width, y:Math.random()*bgCanvas.height,
+    r:Math.random()*2+0.5, op:Math.random()*0.18+0.04,
+    vx:(Math.random()-0.5)*0.12, vy:(Math.random()-0.5)*0.08,
+    col: Math.random()<0.5?'rgba(194,96,122,':'rgba(201,149,108,'
+  });
+}
+
+let bgF = 0;
+(function bgAnim(){
+  bgF++;
+  const W = bgCanvas.width, H = bgCanvas.height;
+  bgCtx.clearRect(0,0,W,H);
+  bgCtx.fillStyle = '#100a10';
+  bgCtx.fillRect(0,0,W,H);
+
+  orbs.forEach(o=>{
+    o.angle += o.speed;
+    const cx = (o.x + Math.sin(o.angle)*0.12)*W;
+    const cy = (o.y + Math.cos(o.angle*0.7)*0.09)*H;
+    const pulse = Math.sin(bgF*0.015+o.angle)*0.025;
+    const rad = (o.r+pulse)*Math.min(W,H);
+    const grad = bgCtx.createRadialGradient(cx,cy,0,cx,cy,rad);
+    const op = o.baseOp + Math.sin(bgF*0.012+o.angle)*0.03;
+    grad.addColorStop(0, o.col+op+')');
+    grad.addColorStop(0.5, o.col+(op*0.4)+')');
+    grad.addColorStop(1, o.col+'0)');
+    bgCtx.fillStyle = grad;
+    bgCtx.beginPath(); bgCtx.arc(cx,cy,rad,0,Math.PI*2); bgCtx.fill();
+  });
+
+  dust.forEach(d=>{
+    d.x+=d.vx; d.y+=d.vy;
+    if(d.x<-5)d.x=W+5; if(d.x>W+5)d.x=-5;
+    if(d.y<-5)d.y=H+5; if(d.y>H+5)d.y=-5;
+    const dop = d.op + Math.sin(bgF*0.02+d.x*0.01)*0.05;
+    bgCtx.globalAlpha = Math.max(0,dop);
+    bgCtx.fillStyle = d.col+'1)';
+    bgCtx.beginPath(); bgCtx.arc(d.x,d.y,d.r,0,Math.PI*2); bgCtx.fill();
+  });
+  bgCtx.globalAlpha = 1;
+
+  stars.forEach(s=>{
+    const tw = Math.sin(bgF*s.twinkleSpeed+s.twinkleOffset)*0.5+0.5;
+    const sop = s.op*(0.4+tw*0.6);
+    bgCtx.globalAlpha = sop;
+    bgCtx.fillStyle = s.color;
+    bgCtx.beginPath(); bgCtx.arc(s.x,s.y,s.r*(0.7+tw*0.5),0,Math.PI*2); bgCtx.fill();
+  });
+  bgCtx.globalAlpha = 1;
+
+  requestAnimationFrame(bgAnim);
+})();
+
+/* ============================================================
+   FLOATING PETALS — ambient, subtle
+============================================================ */
+const pCanvas = document.getElementById('petal-canvas');
+const pCtx = pCanvas.getContext('2d');
+function pResize(){ pCanvas.width = window.innerWidth; pCanvas.height = window.innerHeight; }
+pResize(); window.addEventListener('resize', pResize);
+
+const petals = [];
+const pColors = ['#c2607a','#e8849a','#f5b8c8','#c9956c','#e3c39a'];
+function mkPetal(){
+  return {
+    x:Math.random()*pCanvas.width, y:-20,
+    size:Math.random()*8+5, vy:Math.random()*1+0.3, vx:(Math.random()-0.5)*0.6,
+    rot:Math.random()*360, rotV:(Math.random()-0.5)*1.6,
+    op:Math.random()*0.4+0.15, col:pColors[Math.floor(Math.random()*pColors.length)],
+    sw:Math.random()*1.4, swo:Math.random()*Math.PI*2
+  };
+}
+for(let i=0;i<20;i++){ const p=mkPetal(); p.y=Math.random()*pCanvas.height; petals.push(p); }
+
+let pf = 0;
+(function pAnim(){
+  pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
+  pf++;
+  if(pf%18===0 && petals.length<36) petals.push(mkPetal());
+  for(let i=petals.length-1;i>=0;i--){
+    const p = petals[i];
+    p.y += p.vy;
+    p.x += p.vx + Math.sin(pf*0.018+p.swo)*p.sw*0.25;
+    p.rot += p.rotV;
+    pCtx.save();
+    pCtx.globalAlpha = p.op;
+    pCtx.translate(p.x,p.y);
+    pCtx.rotate(p.rot*Math.PI/180);
+    pCtx.fillStyle = p.col;
+    pCtx.beginPath();
+    pCtx.ellipse(0,0,p.size*0.45,p.size,0,0,Math.PI*2);
+    pCtx.fill();
+    pCtx.restore();
+    if(p.y>pCanvas.height+30) petals.splice(i,1);
+  }
+  requestAnimationFrame(pAnim);
+})();
+</script>
+
+<script>
+/* ============================================================
+   CURSOR SPARKLE TRAIL — small hearts/sparkles following pointer
+============================================================ */
+(function cursorTrail(){
+  // Respect reduced motion preference
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const trailCanvas = document.createElement('canvas');
+  trailCanvas.id = 'cursor-trail-canvas';
+  trailCanvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:550;';
+  document.body.appendChild(trailCanvas);
+  const tx = trailCanvas.getContext('2d');
+
+  function resizeTrail(){ trailCanvas.width = window.innerWidth; trailCanvas.height = window.innerHeight; }
+  resizeTrail();
+  window.addEventListener('resize', resizeTrail);
+
+  const symbols = ['♡','✦','✧','·'];
+  const trailParticles = [];
+  let lastSpawn = 0;
+  const SPAWN_INTERVAL = 70; // ms, throttle so it stays light
+  let pointerActive = false;
+  let px = -100, py = -100;
+
+  function spawnSparkle(x, y){
+    trailParticles.push({
+      x, y,
+      vx:(Math.random()-0.5)*0.4,
+      vy:-(Math.random()*0.5+0.3),
+      size:Math.random()*9+8,
+      rot:Math.random()*40-20,
+      op:0.85,
+      decay:0.018+Math.random()*0.012,
+      sym: symbols[Math.floor(Math.random()*symbols.length)],
+      col: Math.random()<0.5 ? '#e8849a' : '#ecd2b6'
+    });
+    if(trailParticles.length>40) trailParticles.shift();
+  }
+
+  function handleMove(x, y){
+    pointerActive = true;
+    const now = performance.now();
+    if(now - lastSpawn > SPAWN_INTERVAL){
+      lastSpawn = now;
+      spawnSparkle(x + (Math.random()*10-5), y + (Math.random()*10-5));
+    }
+    px = x; py = y;
+  }
+
+  window.addEventListener('mousemove', e=> handleMove(e.clientX, e.clientY), {passive:true});
+  window.addEventListener('touchmove', e=>{
+    if(e.touches && e.touches[0]) handleMove(e.touches[0].clientX, e.touches[0].clientY);
+  }, {passive:true});
+
+  function trailTick(){
+    tx.clearRect(0,0,trailCanvas.width, trailCanvas.height);
+    for(let i=trailParticles.length-1;i>=0;i--){
+      const p = trailParticles[i];
+      p.x += p.vx; p.y += p.vy;
+      p.op -= p.decay;
+      if(p.op<=0){ trailParticles.splice(i,1); continue; }
+      tx.save();
+      tx.globalAlpha = Math.max(0,p.op);
+      tx.translate(p.x, p.y);
+      tx.rotate(p.rot*Math.PI/180);
+      tx.font = `${p.size}px sans-serif`;
+      tx.fillStyle = p.col;
+      tx.textAlign = 'center';
+      tx.textBaseline = 'middle';
+      tx.fillText(p.sym, 0, 0);
+      tx.restore();
+    }
+    requestAnimationFrame(trailTick);
+  }
+  requestAnimationFrame(trailTick);
+})();
+</script>
+</body>
+</html>
